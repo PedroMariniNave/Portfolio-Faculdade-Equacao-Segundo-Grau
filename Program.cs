@@ -2,6 +2,9 @@
 {
     public class Program
     {
+        private const string INPUT_YES = "S";
+        private const string INPUT_NO = "N";
+
         public static void Main()
         {
             bool isCalculating = true;
@@ -60,12 +63,24 @@
 
         private static void VerificarSeDesejaCalcularNovamente(ref bool isCalculating)
         {
+            string[] validInputs = [INPUT_YES, INPUT_NO];
+
             Console.WriteLine("");
             Console.WriteLine("Deseja calcular novamente?");
-            Console.WriteLine("S/N");
+            Console.WriteLine($"{INPUT_YES}/{INPUT_NO}");
             Console.WriteLine("");
 
             var input = Console.ReadLine();
+            while (!validInputs.Any(a => a.Equals(input, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                Console.WriteLine("A ação informada é inválida!");
+                Console.WriteLine("");
+                Console.WriteLine($"Digite '{INPUT_YES}' para Sim");
+                Console.WriteLine($"Digite '{INPUT_NO}' para Não");
+                Console.WriteLine("");
+                input = Console.ReadLine();
+            }
+
             isCalculating = input.Equals("S", StringComparison.InvariantCultureIgnoreCase);
 
             Console.WriteLine("");
